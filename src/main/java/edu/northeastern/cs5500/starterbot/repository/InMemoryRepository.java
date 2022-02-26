@@ -6,8 +6,10 @@ import java.util.HashMap;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.bson.types.ObjectId;
 
+@Singleton
 public class InMemoryRepository<T extends Model> implements GenericRepository<T> {
 
     HashMap<ObjectId, T> collection;
