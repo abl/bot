@@ -1,17 +1,20 @@
 package edu.northeastern.cs5500.starterbot.command;
 
 import edu.northeastern.cs5500.starterbot.controller.UserPreferenceController;
+import java.util.Objects;
+import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
-import net.dv8tion.jda.api.interactions.commands.CommandInteraction;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
+import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
 @Singleton
 @Slf4j
-public class PreferredNameCommand implements Command {
+public class PreferredNameCommand implements SlashCommandHandler {
 
     @Inject UserPreferenceController userPreferenceController;
 
@@ -19,13 +22,15 @@ public class PreferredNameCommand implements Command {
     public PreferredNameCommand() {}
 
     @Override
+    @Nonnull
     public String getName() {
         return "preferredname";
     }
 
     @Override
+    @Nonnull
     public CommandData getCommandData() {
-        return new CommandData(getName(), "Tell the bot what name to address you with")
+        return Commands.slash(getName(), "Tell the bot what name to address you with")
                 .addOptions(
                         new OptionData(
                                         OptionType.STRING,
@@ -35,9 +40,9 @@ public class PreferredNameCommand implements Command {
     }
 
     @Override
-    public void onEvent(CommandInteraction event) {
+    public void onSlashCommandInteraction(@Nonnull SlashCommandInteractionEvent event) {
         log.info("event: /preferredname");
-        String preferredName = event.getOption("name").getAsString();
+        String preferredName = Objects.requireNonNull(event.getOption("name")).getAsString();
 
         String discordUserId = event.getUser().getId();
 

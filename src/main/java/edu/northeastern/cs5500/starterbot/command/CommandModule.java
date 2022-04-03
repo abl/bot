@@ -9,13 +9,38 @@ public class CommandModule {
 
     @Provides
     @IntoSet
-    public Command provideSayCommand(SayCommand sayCommand) {
+    public SlashCommandHandler provideSayCommand(ButtonCommand sayCommand) {
         return sayCommand;
     }
 
     @Provides
     @IntoSet
-    public Command providePreferredNameCommand(PreferredNameCommand preferredNameCommand) {
+    public SlashCommandHandler providePreferredNameCommand(
+            PreferredNameCommand preferredNameCommand) {
         return preferredNameCommand;
+    }
+
+    @Provides
+    @IntoSet
+    public SlashCommandHandler provideButtonCommand(ButtonCommand buttonCommand) {
+        return buttonCommand;
+    }
+
+    @Provides
+    @IntoSet
+    public ButtonHandler provideButtonCommandClickHandler(ButtonCommand buttonCommand) {
+        return buttonCommand;
+    }
+
+    @Provides
+    @IntoSet
+    public SlashCommandHandler provideDropdownCommand(DropdownCommand dropdownCommand) {
+        return dropdownCommand;
+    }
+
+    @Provides
+    @IntoSet
+    public StringSelectHandler provideDropdownCommandMenuHandler(DropdownCommand dropdownCommand) {
+        return dropdownCommand;
     }
 }
