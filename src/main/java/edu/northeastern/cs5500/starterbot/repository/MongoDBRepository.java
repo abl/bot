@@ -8,6 +8,7 @@ import edu.northeastern.cs5500.starterbot.model.Model;
 import edu.northeastern.cs5500.starterbot.service.MongoDBService;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 import org.bson.types.ObjectId;
@@ -25,12 +26,12 @@ public class MongoDBRepository<T extends Model> implements GenericRepository<T> 
     }
 
     @Nullable
-    public T get(ObjectId id) {
+    public T get(@Nonnull ObjectId id) {
         return collection.find(eq(MONGODB_ID_FIELD, id)).first();
     }
 
     @Override
-    public T add(T item) {
+    public T add(@Nonnull T item) {
         if (item.getId() == null) {
             item.setId(new ObjectId());
         }
@@ -39,12 +40,12 @@ public class MongoDBRepository<T extends Model> implements GenericRepository<T> 
     }
 
     @Override
-    public T update(T item) {
+    public T update(@Nonnull T item) {
         return collection.findOneAndReplace(eq(MONGODB_ID_FIELD, item.getId()), item);
     }
 
     @Override
-    public void delete(ObjectId id) {
+    public void delete(@Nonnull ObjectId id) {
         collection.deleteOne(eq(MONGODB_ID_FIELD, id));
     }
 

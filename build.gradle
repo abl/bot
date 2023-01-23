@@ -73,21 +73,21 @@ test {
     useJUnitPlatform()
 }
 
-// Target Java 11 - make sure system.properties matches this as well
-sourceCompatibility = 1.11
-targetCompatibility = 1.11
+// Target Java 17 - make sure system.properties matches this as well
+sourceCompatibility = 1.17
+targetCompatibility = 1.17
 
 sourceSets {
     main {
         java {
             srcDirs 'src/main/java'
-            srcDirs 'build/generated/sources/annotationProcessor/java/main'
+            // srcDirs 'build/generated/sources/annotationProcessor/java/main'
         }
     }
     test {
         java {
             srcDirs 'src/test/java'
-            srcDirs 'build/generated/sources/annotationProcessor/java/test'
+            // srcDirs 'build/generated/sources/annotationProcessor/java/test'
         }
     }
 }

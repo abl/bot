@@ -130,6 +130,4 @@ gradle-app.setting
 # Do not ignore recommended extensions
 !.vscode/extensions.json
 
-# Necessary to keep Dagger errors from propagating.
-!.settings/org.eclipse.jdt.core.prefs
-
+bin/
