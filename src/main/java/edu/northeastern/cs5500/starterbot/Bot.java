@@ -4,8 +4,9 @@ import dagger.Component;
 import edu.northeastern.cs5500.starterbot.command.CommandModule;
 import edu.northeastern.cs5500.starterbot.listener.MessageListener;
 import edu.northeastern.cs5500.starterbot.repository.RepositoryModule;
+import java.util.Collection;
 import java.util.EnumSet;
-import java.util.Objects;
+import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import net.dv8tion.jda.api.JDA;
@@ -36,14 +37,13 @@ public class Bot {
             throw new IllegalArgumentException(
                     "The BOT_TOKEN environment variable is not defined.");
         }
-        JDA jda =
-                JDABuilder.createLight(
-                                token, Objects.requireNonNull(EnumSet.noneOf(GatewayIntent.class)))
-                        .addEventListeners(messageListener)
-                        .build();
+        @SuppressWarnings("null")
+        @Nonnull
+        Collection<GatewayIntent> intents = EnumSet.noneOf(GatewayIntent.class);
+        JDA jda = JDABuilder.createLight(token, intents).addEventListeners(messageListener).build();
 
         CommandListUpdateAction commands = jda.updateCommands();
-        commands.addCommands(Objects.requireNonNull(messageListener.allCommandData()));
+        commands.addCommands(messageListener.allCommandData());
         commands.queue();
     }
 }

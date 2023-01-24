@@ -1,9 +1,8 @@
 package edu.northeastern.cs5500.starterbot.listener;
 
 import edu.northeastern.cs5500.starterbot.command.Command;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
@@ -35,7 +34,7 @@ public class MessageListener extends ListenerAdapter {
         Collection<CommandData> commandData =
                 commands.stream().map(Command::getCommandData).collect(Collectors.toList());
         if (commandData == null) {
-            return Objects.requireNonNull(List.of());
+            return new ArrayList<>();
         }
         return commandData;
     }
