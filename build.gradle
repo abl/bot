@@ -94,7 +94,7 @@ jacocoTestReport {
 // Check coverage after each test run
 check.dependsOn jacocoTestCoverageVerification
 
-// Target Java 11 - make sure system.properties matches this as well
+// Target Java 17 - make sure system.properties matches this as well
 sourceCompatibility = 1.17
 targetCompatibility = 1.17
 
