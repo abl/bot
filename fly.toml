@@ -11,6 +11,7 @@ processes = []
 
 [build.args]
   BP_JVM_VERSION=17
+  BP_INCLUDE_FILES="agent/honey-javaagent.jar"
 
 [deploy]
   strategy = "canary"
