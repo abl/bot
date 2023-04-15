@@ -140,14 +140,14 @@ task copyAgentJar(type: Copy) {
     from configurations.agent {
         include '**/honeycomb-opentelemetry-javaagent*.jar'
     }
-    into "agent"
+    into "zagent"
     rename { fileName -> "honey-javaagent.jar" }
 }
 
 compileJava.dependsOn copyAgentJar
 
-applicationDefaultJvmArgs = [ "-javaagent:agent/honey-javaagent.jar" ]
+applicationDefaultJvmArgs = [ "-javaagent:zagent/honey-javaagent.jar" ]
 
 clean.doFirst {
-    delete "agent"
+    delete "zagent"
 }
