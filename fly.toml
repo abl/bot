@@ -7,7 +7,10 @@ primary_region = "sea"
 processes = []
 
 [build]
-  builder = "cloudfoundry/cnb:bionic"
+  builder = "paketobuildpacks/builder:base"
+
+[build.args]
+  BP_JVM_VERSION=17
 
 [deploy]
   strategy = "canary"
