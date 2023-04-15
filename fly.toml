@@ -24,7 +24,7 @@ processes = []
   HONEYCOMB_METRICS_DATASET="production"
   OTEL_JAVAAGENT_ENABLED="true"
   OTEL_METRICS_EXPORTER="otlp"
-  OTEL_EXPOTER_OTLP_ENDPOINT="https://api.honeycomb.io:443"
+  OTEL_EXPOTER_OTLP_ENDPOINT="api.honeycomb.io:443"
 
 [[services]]
   http_checks = []
