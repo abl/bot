@@ -4,7 +4,6 @@ import edu.northeastern.cs5500.starterbot.controller.UserPreferenceController;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -12,19 +11,22 @@ import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
-@Singleton
 @Slf4j
 public class PreferredNameCommand implements SlashCommandHandler {
+
+    static final String NAME = "preferredname";
 
     @Inject UserPreferenceController userPreferenceController;
 
     @Inject
-    public PreferredNameCommand() {}
+    public PreferredNameCommand() {
+        // Empty and public for Dagger
+    }
 
     @Override
     @Nonnull
     public String getName() {
-        return "preferredname";
+        return NAME;
     }
 
     @Override

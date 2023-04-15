@@ -2,16 +2,16 @@ package edu.northeastern.cs5500.starterbot.command;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 
-@Singleton
 @Slf4j
 public class SayCommand implements SlashCommandHandler {
+
+    static final String NAME = "say";
 
     @Inject
     public SayCommand() {
@@ -21,7 +21,7 @@ public class SayCommand implements SlashCommandHandler {
     @Override
     @Nonnull
     public String getName() {
-        return "say";
+        return NAME;
     }
 
     @Override

@@ -1,23 +1,28 @@
 package edu.northeastern.cs5500.starterbot.service;
 
-import lombok.Getter;
+import io.opentelemetry.api.GlobalOpenTelemetry;
+import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.SpanKind;
+import io.opentelemetry.api.trace.Tracer;
 import javax.inject.Inject;
-import lombok.extern.slf4j.Slf4j;
 import javax.inject.Singleton;
+import lombok.Getter;
 
 @Singleton
-@Slf4j
-public class OpenTelemetryService implements Service {
+public class OpenTelemetryService implements OpenTelemetry {
 
     @Getter Tracer tracer;
 
     @Inject
     public OpenTelemetryService() {
-        tracer = openTelemetry.getTracer("cs5500-s23-starterbot", "1.0.0");
+        tracer = GlobalOpenTelemetry.getTracer("cs5500-s23-starterbot");
     }
 
-    @Override
-    public void register() {
-        log.info("OpenTelemetryService > register");
+    public Span span(String name) {
+        return span(name, SpanKind.SERVER);
+    }
+
+    public Span span(String name, SpanKind kind) {
+        return getTracer().spanBuilder(name).setSpanKind(kind).startSpan();
     }
 }

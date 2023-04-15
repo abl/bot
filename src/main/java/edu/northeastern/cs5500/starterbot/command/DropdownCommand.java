@@ -3,7 +3,6 @@ package edu.northeastern.cs5500.starterbot.command;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent;
@@ -11,17 +10,20 @@ import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu;
 
-@Singleton
 @Slf4j
 public class DropdownCommand implements SlashCommandHandler, StringSelectHandler {
 
+    static final String NAME = "dropdown";
+
     @Inject
-    public DropdownCommand() {}
+    public DropdownCommand() {
+        // Empty and public for Dagger
+    }
 
     @Override
     @Nonnull
     public String getName() {
-        return "dropdown";
+        return NAME;
     }
 
     @Override
@@ -35,7 +37,7 @@ public class DropdownCommand implements SlashCommandHandler, StringSelectHandler
         log.info("event: /dropdown");
 
         StringSelectMenu menu =
-                StringSelectMenu.create("dropdown")
+                StringSelectMenu.create(NAME)
                         .setPlaceholder(
                                 "Choose your class") // shows the placeholder indicating what this
                         // menu is for

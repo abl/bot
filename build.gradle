@@ -24,7 +24,13 @@ repositories {
     }
 }
 
+configurations {
+    agent
+}
+
 dependencies {
+    agent 'io.honeycomb:honeycomb-opentelemetry-javaagent:_'
+
     // log4j so JDA can log
     implementation 'org.apache.logging.log4j:log4j-api:_'
     implementation 'org.apache.logging.log4j:log4j-core:_'
@@ -62,10 +68,7 @@ dependencies {
     implementation 'org.mongodb:mongo-java-driver:_'
 
     // opentelemetry tracing
-    implementation 'io.opentelemetry:opentelemetry-api:1.25.0'
-    implementation 'io.opentelemetry:opentelemetry-sdk:1.25.0'
-    implementation 'io.opentelemetry:opentelemetry-exporter-otlp:1.25.0'
-    implementation 'io.opentelemetry:opentelemetry-semconv:1.25.0-alpha'
+    implementation 'io.honeycomb:honeycomb-opentelemetry-sdk:_'
 }
 
 application {
@@ -133,6 +136,18 @@ spotless {
     }
 }
 
-applicationDefaultJvmArgs = [
-    "-javaagent:honeycomb-opentelemetry-javaagent-1.4.2.jar"
-]
+task copyAgentJar(type: Copy) {
+    from configurations.agent {
+        include '**/honeycomb-opentelemetry-javaagent*.jar'
+    }
+    into "agent"
+    rename { fileName -> "honey-javaagent.jar" }
+}
+
+compileJava.dependsOn copyAgentJar
+
+applicationDefaultJvmArgs = [ "-javaagent:agent/honey-javaagent.jar" ]
+
+clean.doFirst {
+    delete "agent"
+}

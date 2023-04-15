@@ -2,7 +2,6 @@ package edu.northeastern.cs5500.starterbot.command;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
@@ -11,17 +10,19 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 
-@Singleton
 @Slf4j
 public class ButtonCommand implements SlashCommandHandler, ButtonHandler {
+    static final String NAME = "button";
 
     @Inject
-    public ButtonCommand() {}
+    public ButtonCommand() {
+        // Empty and public for Dagger
+    }
 
     @Override
     @Nonnull
     public String getName() {
-        return "button";
+        return NAME;
     }
 
     @Override
@@ -37,8 +38,8 @@ public class ButtonCommand implements SlashCommandHandler, ButtonHandler {
         MessageCreateBuilder messageCreateBuilder = new MessageCreateBuilder();
         messageCreateBuilder =
                 messageCreateBuilder.addActionRow(
-                        Button.primary(this.getName() + ":ok", "OK"),
-                        Button.danger(this.getName() + ":cancel", "Cancel"));
+                        Button.primary(getName() + ":ok", "OK"),
+                        Button.danger(getName() + ":cancel", "Cancel"));
         messageCreateBuilder = messageCreateBuilder.setContent("Example buttons");
         event.reply(messageCreateBuilder.build()).queue();
     }
