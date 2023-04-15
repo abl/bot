@@ -61,6 +61,11 @@ dependencies {
     // MongoDB for data storage
     implementation 'org.mongodb:mongo-java-driver:_'
 
+    // opentelemetry tracing
+    implementation 'io.opentelemetry:opentelemetry-api:1.25.0'
+    implementation 'io.opentelemetry:opentelemetry-sdk:1.25.0'
+    implementation 'io.opentelemetry:opentelemetry-exporter-otlp:1.25.0'
+    implementation 'io.opentelemetry:opentelemetry-semconv:1.25.0-alpha'
 }
 
 application {
@@ -127,3 +132,7 @@ spotless {
         googleJavaFormat().aosp()
     }
 }
+
+applicationDefaultJvmArgs = [
+    "-javaagent:honeycomb-opentelemetry-javaagent-1.4.2.jar"
+]
