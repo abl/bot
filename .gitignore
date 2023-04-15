@@ -134,3 +134,5 @@ gradle-app.setting
 !.vscode/settings.json
 
 bin/
+
+!honeycomb-opentelemetry-javaagent-1.4.2.jar

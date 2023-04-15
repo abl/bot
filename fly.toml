@@ -14,7 +14,9 @@ processes = []
 
 [env]
   BPL_JVM_THREAD_COUNT = 50
-  JAVA_TOOL_OPTIONS = "-Xss256K -XX:ReservedCodeCacheSize=64M -XX:MaxMetaspaceSize=64M"
+  JAVA_TOOL_OPTIONS = "-Xss256K -XX:ReservedCodeCacheSize=64M -XX:MaxMetaspaceSize=64M -javaagent:honeycomb-opentelemetry-javaagent-1.4.2.jar"
+  SERVICE_NAME="cs5500-s23-starterbot"
+  HONEYCOMB_METRICS_DATASET="production"
 
 [[services]]
   http_checks = []
